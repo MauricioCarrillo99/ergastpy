@@ -23,13 +23,3 @@ setuptools.setup(
                         'pdp'
 	],
 )
-
-setup(name='py_qbee_tst',
-    version='0.1',
-    description='test package to run on qbee.io',
-    author='qbee AS',
-    author_email='author@somemail.com',
-    license='MIT',
-    packages=['py_qbee_tst'],
-    scripts=['bin/qbee_tst.py'],
-    zip_safe=False)
