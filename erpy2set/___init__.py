@@ -1,1 +1,1 @@
-from erpy2set import py_erpy2set
+from erpy2set import erpy2set
