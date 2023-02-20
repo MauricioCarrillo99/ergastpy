@@ -8,12 +8,12 @@ pip3 install wheel setuptools pip --upgrade
 from setuptools import setup
 
 setuptools.setup(
-	name='erpy2set',
+	name='erpy2set_tst',
 	version='1.0',
 	description='ergast-python-2-set',
 	author='Mauricio Carrillo',
-	author_email='jdoe@example.com',
-	packages=['erpy2set'],
+	author_email='mury_cpineda@hotmail.com',
+	packages=['erpy2set_tst'],
 	install_requires=['numpy',
                         'pandas',
                         'requests',
