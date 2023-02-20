@@ -11,5 +11,5 @@ setup(
     version="1.0",
     license="MIT",
     description="A extension of ergast developer API",
-    long_description=open('README.txt').read(),
+    long_description=open('README.txt').read()
 )
