@@ -9,4 +9,3 @@ db_seasons=pd.DataFrame(r.get(url).json()['MRData']['seasons']['SeasonTable'])
 
 print(db_seasons)
 
-#erpy.unravel_noKey(db_seasons)
