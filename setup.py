@@ -14,6 +14,8 @@ setuptools.setup(
 	author='Mauricio Carrillo',
 	author_email='mury_cpineda@hotmail.com',
 	packages=['erpy2set_tst'],
+	scripts=['bin/erpy2set_tst']
+	zip_safe=False,
 	install_requires=['numpy',
                         'pandas',
                         'requests',
@@ -21,3 +23,13 @@ setuptools.setup(
                         'pdp'
 	],
 )
+
+setup(name='py_qbee_tst',
+    version='0.1',
+    description='test package to run on qbee.io',
+    author='qbee AS',
+    author_email='author@somemail.com',
+    license='MIT',
+    packages=['py_qbee_tst'],
+    scripts=['bin/qbee_tst.py'],
+    zip_safe=False)
