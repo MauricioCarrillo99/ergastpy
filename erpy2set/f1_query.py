@@ -13,7 +13,6 @@ import requests as r
 import json 
 import pandas as pd
 import numpy as np
-import pdb
 
 """# **QUERY PACK**
 
