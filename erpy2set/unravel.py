@@ -168,7 +168,7 @@ def unravel(Df, join_id_column,desired_column_name):
        for i in expand_names:
 
 
-         df_aux=expand(Df[i].tolist(), join_id_column.tolist(), desired_column_name,i)
+         df_aux=expand(Df[i].tolist(), join_id_column.tolist(), desired_column_name,i,first_dict(Df[i]))
          new_cols=df_aux.loc[:, df_aux.columns!=desired_column_name]      
 
          position_insert=Df.columns.get_loc(i)
