@@ -7,7 +7,7 @@ setup(
     author_email="mury_cpineda@hotmail.com",
     packages=['erpy2set'],
     package_dir={"erpy2set":"erpy2set"},
-    install_requires=["numpy >=1.21.6","pandas >= 1.3.5","requests >=2.25.1","json >= 2.0.9"],
+    install_requires=["numpy >=1.21.6","pandas >= 1.3.5","requests >=2.25.1","json"],
     version="1.0",
     license="unlicense",
     description="A extension of ergast developer API",
