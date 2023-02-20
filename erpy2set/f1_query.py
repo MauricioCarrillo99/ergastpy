@@ -9,7 +9,7 @@ Original file is located at
 # **Paqueterias**
 """
 
-import erpy2set.unravel
+import erpy2set.unravel as un
 import requests as r
 import json 
 import pandas as pd
@@ -159,7 +159,7 @@ def raw_table(table_name,year):
      locations=dimension_tables[table_name]
      Df=pd.DataFrame(data['MRData'][locations][firstCap(table_name)])
 
-     unravel_noKey(Df)
+     un.unravel_noKey(Df)
 
     elif table_name in fact_tables:
 
@@ -170,7 +170,7 @@ def raw_table(table_name,year):
 
            locations=fact_tables[table_name]
            aux_Df=pd.DataFrame(data['MRData'][locations[0]][locations[1]][0][firstCap(table_name)])
-           unravel_noKey(aux_Df)
+           un.unravel_noKey(aux_Df)
            aux_Df['racesId']=i
            aux_Df['year']=year
         
