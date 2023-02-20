@@ -6,7 +6,7 @@ setup(
     author="Mauricio Carrillo",
     author_email="mury_cpineda@hotmail.com",
     packages=['erpy2set'],
-    install_requires=["numpy >=1.21.6","pandas >= 1.3.5","requests >=2.25.1","erpy2set.unravel >=1.0","erpy2set.f1_query>=1.0"],
+    install_requires=["numpy >=1.21.6","pandas >= 1.3.5","requests >=2.25.1"],
     version="1.0",
     license="unlicense",
     description="A extension of ergast developer API",
