@@ -1,15 +1,15 @@
 from setuptools import setup
 
 setup(
-    name='py_erpy2set',
-    url='https://github.com/maxelOA/py_erpy2set/',
-    author='Mauricio Carrillo',
-    author_email='mury_cpineda@hotmail.com',
+    name="py_erpy2set",
+    url="https://github.com/maxelOA/py_erpy2set/",
+    author="Mauricio Carrillo",
+    author_email="mury_cpineda@hotmail.com",
     packages=['erpy2set'],
     package_dir={"erpy2set":"erpy2set"},
-    install_requires=['numpy','pandas','requests','json'],
-    version='1.0',
-    license='MIT',
-    description='A extension of ergast developer API',
+    install_requires=["numpy >=1.21.6","pandas >= 1.3.5","requests >=2.25.1","json >= 2.0.9"],
+    version="1.0",
+    license="MIT",
+    description="A extension of ergast developer API",
     long_description=open('README.txt').read(),
 )
