@@ -76,7 +76,7 @@ def constructorResults_tbl(year):
 
       aux_data=pd.DataFrame(r.get(url).json()['MRData']['RaceTable']['Races'][0]['Results'])
       aux_data=aux_data[['Constructor','points','status']]
-      unravel_noKey(aux_data)
+      un.unravel_noKey(aux_data)
 
       aux_data['raceId']=i
       data=data.append(aux_data)
@@ -188,7 +188,7 @@ def raw_table(table_name,year):
      Df=constructorResults_tbl(year)
    
   else:
-     print("No table exist in the schema with that name")
+     print(f"{table_name} not found in the schema")
 
   return Df
 
@@ -275,9 +275,11 @@ def full_schema(initial_date,final_date):
 from datetime import time
 
 def adj_type(table):
-
+    
+  print('adj_type still in develop')
   string_type=[]
   date_type=[]
   time_type=[]
   int_type=[]
   float_type=[]
+
