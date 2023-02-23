@@ -33,12 +33,13 @@ def laps_tbl(year):
     k=max_laps(year,j)
     
     for i in list(range(1,k+1)):
-      url=f'http://ergast.com/api/f1/{year}/{j}/laps/{i}.json'
-
-      aux_data=pd.DataFrame(r.get(url).json()['MRData']['RaceTable']['Races'][0]['Laps'][0]['Timings'])
-      aux_data[['lap','raceId']]=[i,j]
-      data=data.append(aux_data)
-    
+        try:
+            url=f'http://ergast.com/api/f1/{year}/{j}/laps/{i}.json'
+            aux_data=pd.DataFrame(r.get(url).json()['MRData']['RaceTable']['Races'][0]['Laps'][0]['Timings'])
+            aux_data[['lap','raceId']]=[i,j]
+            data=data.append(aux_data)
+        except:
+            i+=1
   return data
 
 ########################################
