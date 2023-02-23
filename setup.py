@@ -8,7 +8,7 @@ setup(
     packages=['erpy2set'],
     install_requires=["numpy >=1.21.6","pandas >= 1.3.5","requests >=2.25.1"],
     version="1.0",
-    license="unlicense",
+    license="CCPL",
     description="A extension of ergast developer API",
     long_description=open('README.txt').read()
 )
