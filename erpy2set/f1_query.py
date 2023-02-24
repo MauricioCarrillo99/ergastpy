@@ -168,6 +168,7 @@ def raw_table(table_name,year):
         try:
            url=f'https://ergast.com/api/f1/{year}/{i}/{adj_name(table_name)}.json'
            data=r.get(url).json() 
+           print(data)
 
            locations=fact_tables[table_name]
            aux_Df=pd.DataFrame(data['MRData'][locations[0]][locations[1]][0][firstCap(table_name)])
@@ -202,7 +203,6 @@ def raw_table(table_name,year):
 def clean_table(table_name,year):
 
   r_table=raw_table(table_name,year)
-  print(r_table.keys())
 
   if table_name=='races':
 
