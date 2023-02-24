@@ -202,7 +202,7 @@ def raw_table(table_name,year):
 def clean_table(table_name,year):
 
   r_table=raw_table(table_name,year)
-  try:
+  #try:
     if table_name=='races':
 
         table=r_table[['season','round','Circuit_circuitId','raceName','Circuit_circuitName','date','time','url','FirstPractice_date','SecondPractice_date','ThirdPractice_date','Sprint_date']]
@@ -250,8 +250,8 @@ def clean_table(table_name,year):
          return table
     else:
          return r_table
-  except:
-    return r_table
+ # except:
+   # return r_table
   
 
 ############################################
