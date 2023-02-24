@@ -202,53 +202,50 @@ def raw_table(table_name,year):
 def clean_table(table_name,year):
 
   r_table=raw_table(table_name,year)
+  try:
+    if table_name=='races':
 
-  if table_name=='races':
+        table=r_table[['season','round','Circuit_circuitId','raceName','Circuit_circuitName','date','time','url','FirstPractice_date','SecondPractice_date','ThirdPractice_date','Sprint_date']]
+        table.columns=['season','round','circuitId','raceName','circuitName','date','time','url','FirstPractice_date','SecondPractice_date','ThirdPractice_date','Sprint_date']
 
-    table=r_table[['season','round','Circuit_circuitId','raceName','Circuit_circuitName','date','time','url','FirstPractice_date','SecondPractice_date','ThirdPractice_date','Sprint_date']]
-    table.columns=['season','round','circuitId','raceName','circuitName','date','time','url','FirstPractice_date','SecondPractice_date','ThirdPractice_date','Sprint_date']
+    elif table_name=='results': 
 
-  elif table_name=='results': 
+         table=r_table[['racesId','year','Driver_driverId','Constructor_constructorId','number','grid','position','positionText','points','laps','Time_time','Time_millis','FastestLap_lap','FastestLap_rank','FastestLap_Time_time','FastestLap_AverageSpeed_speed','status']]
+         table.columns=['raceId','season','driverId','constructorId','number','grid','position','positionText','points','laps','time','milliseconds','fastestLap','rank','fastestLapTime','fastestLapSpeed','status']
 
-     table=r_table[['racesId','year','Driver_driverId','Constructor_constructorId','number','grid','position','positionText','points','laps','Time_time','Time_millis','FastestLap_lap','FastestLap_rank','FastestLap_Time_time','FastestLap_AverageSpeed_speed','status']]
-     table.columns=['raceId','season','driverId','constructorId','number','grid','position','positionText','points','laps','time','milliseconds','fastestLap','rank','fastestLapTime','fastestLapSpeed','status']
+    elif table_name=='circuits':
 
-  elif table_name=='circuits':
+         table=r_table[['circuitId','circuitName','Location_locality','Location_country','Location_lat','Location_long','url']]
+         table.columns=['circuitId','circuitName','locality','country','lat','long','url']
 
-     table=r_table[['circuitId','circuitName','Location_locality','Location_country','Location_lat','Location_long','url']]
-     table.columns=['circuitId','circuitName','locality','country','lat','long','url']
+    elif table_name=='constructorStandings':
 
-  elif table_name=='constructorStandings':
-
-     table=r_table[['racesId','Constructor_constructorId','points','position','positionText','wins']]
-     table.columns=['raceId','constructorId','points','position','positionText','wins']
+         table=r_table[['racesId','Constructor_constructorId','points','position','positionText','wins']]
+         table.columns=['raceId','constructorId','points','position','positionText','wins']
   
-  elif table_name=='driverStandings':
+    elif table_name=='driverStandings':
      
-     table=r_table[['racesId','Driver_driverId','points','position','positionText','wins']]
-     table.columns=['raceId','driverId','points','position','positionText','wins']
+         table=r_table[['racesId','Driver_driverId','points','position','positionText','wins']]
+         table.columns=['raceId','driverId','points','position','positionText','wins']
 
-  elif table_name=='qualifyingResults':
+    elif table_name=='qualifyingResults':
 
-     table=r_table[['racesId','Driver_driverId','Constructor_constructorId','number','position','Q1','Q2','Q3']]
-     table.columns=['raceId','driverId','constructorId','number','position','Q1','Q2','Q3']
+         table=r_table[['racesId','Driver_driverId','Constructor_constructorId','number','position','Q1','Q2','Q3']]
+         table.columns=['raceId','driverId','constructorId','number','position','Q1','Q2','Q3']
     
-  elif table_name=='sprintResults':
-
-       try: 
+    elif table_name=='sprintResults':
+    
          table=r_table['racesId','Driver_driverId','Constructor_constructorId','number','grid','position',
                'positionText','points','laps','Time_time','Time_millis','FastestLap_lap',
                'FastestLap_Time_time', 'status']
          table.columns=['raceId','driverId','constructorId','number','grid','position',
                'positionText','points','laps','time','millis','fastestLap',
-               'fastestLaptime','status']
-
-       except:
-         return r_table   
-
-  else:
-    return r_table
-
+               'fastestLaptime','status']  
+    else:
+         return r_table
+  except:
+    r_table
+    
   return table
 
 ############################################
