@@ -235,7 +235,7 @@ def clean_table(table_name,year):
     
   elif table_name=='sprintResults':
         
-     table=r_tabl['racesId','Driver_driverId','Constructor_constructorId','number','grid','position',
+     table=r_table['racesId','Driver_driverId','Constructor_constructorId','number','grid','position',
              'positionText','points','laps','Time_time','Time_millis','FastestLap_lap',
              'FastestLap_Time_time', 'status']
      table.columns=['raceId','driverId','constructorId','number','grid','position',
