@@ -202,6 +202,7 @@ def raw_table(table_name,year):
 def clean_table(table_name,year):
 
   r_table=raw_table(table_name,year)
+  print(r_table.keys())
 
   if table_name=='races':
 
