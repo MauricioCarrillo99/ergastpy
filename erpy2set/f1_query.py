@@ -244,8 +244,8 @@ def clean_table(table_name,year):
                'positionText','points','laps','time','millis','fastestLap',
                'fastestLaptime','status']
 
-     except:
-       return table   
+       except:
+         return table   
 
   else:
     return r_table
