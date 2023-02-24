@@ -245,7 +245,6 @@ def clean_table(table_name,year):
          return r_table
   except:
     r_table
-    
   return table
 
 ############################################
