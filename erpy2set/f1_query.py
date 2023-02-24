@@ -141,7 +141,7 @@ def raw_table(table_name,year):
   Df=pd.DataFrame()
   
   dimension_tables={'seasons':'SeasonTable','drivers':'DriverTable','constructors':'ConstructorTable','circuits':'CircuitTable','status':'StatusTable','races':'RaceTable'}
-  fact_tables={'driverStandings':['StandingsTable','StandingsLists'],'results':['RaceTable','Races'],'qualifyingResults':['RaceTable','Races'],'constructorStandings':['StandingsTable','StandingsLists']}
+  fact_tables={'driverStandings':['StandingsTable','StandingsLists'],'results':['RaceTable','Races'],'qualifyingResults':['RaceTable','Races'],'constructorStandings':['StandingsTable','StandingsLists'],'sprintResults':['RaceTable','Races']}
 
   depend_races=['pitstops','laps']
   depend_results=['constructorResults']
@@ -165,7 +165,7 @@ def raw_table(table_name,year):
     elif table_name in fact_tables:
 
       for i in list(range(1,total_races+1)):
-
+        try:
            url=f'https://ergast.com/api/f1/{year}/{i}/{adj_name(table_name)}.json'
            data=r.get(url).json() 
 
@@ -176,6 +176,8 @@ def raw_table(table_name,year):
            aux_Df['year']=year
         
            Df=Df.append(aux_Df)
+        except:
+           i+=1
 
     elif table_name in depend_races:
 
@@ -230,6 +232,15 @@ def clean_table(table_name,year):
 
      table=r_table[['racesId','Driver_driverId','Constructor_constructorId','number','position','Q1','Q2','Q3']]
      table.columns=['raceId','driverId','constructorId','number','position','Q1','Q2','Q3']
+    
+  elif: table_name=='sprintResults':
+        
+     table=r_tabl['racesId','Driver_driverId','Constructor_constructorId','number','grid','position',
+             'positionText','points','laps','Time_time','Time_millis','FastestLap_lap',
+             'FastestLap_Time_time', 'status']
+     table.columns=['raceId','driverId','constructorId','number','grid','position',
+             'positionText','points','laps','time','millis','fastestLap',
+             'fastestLaptime','status']
 
   else:
     return r_table
