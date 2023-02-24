@@ -201,7 +201,7 @@ def raw_table(table_name,year):
 
 def clean_table(table_name,year):
 
-  r_table=raw_table(table_name,year)
+    r_table=raw_table(table_name,year)
   #try:
     if table_name=='races':
 
