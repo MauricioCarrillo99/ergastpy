@@ -207,31 +207,37 @@ def clean_table(table_name,year):
 
         table=r_table[['season','round','Circuit_circuitId','raceName','Circuit_circuitName','date','time','url','FirstPractice_date','SecondPractice_date','ThirdPractice_date','Sprint_date']]
         table.columns=['season','round','circuitId','raceName','circuitName','date','time','url','FirstPractice_date','SecondPractice_date','ThirdPractice_date','Sprint_date']
-
+        return table
+        
     elif table_name=='results': 
 
          table=r_table[['racesId','year','Driver_driverId','Constructor_constructorId','number','grid','position','positionText','points','laps','Time_time','Time_millis','FastestLap_lap','FastestLap_rank','FastestLap_Time_time','FastestLap_AverageSpeed_speed','status']]
          table.columns=['raceId','season','driverId','constructorId','number','grid','position','positionText','points','laps','time','milliseconds','fastestLap','rank','fastestLapTime','fastestLapSpeed','status']
-
+         return table
+            
     elif table_name=='circuits':
 
          table=r_table[['circuitId','circuitName','Location_locality','Location_country','Location_lat','Location_long','url']]
          table.columns=['circuitId','circuitName','locality','country','lat','long','url']
+         return table
 
     elif table_name=='constructorStandings':
 
          table=r_table[['racesId','Constructor_constructorId','points','position','positionText','wins']]
          table.columns=['raceId','constructorId','points','position','positionText','wins']
+         return table
   
     elif table_name=='driverStandings':
      
          table=r_table[['racesId','Driver_driverId','points','position','positionText','wins']]
          table.columns=['raceId','driverId','points','position','positionText','wins']
+         return table
 
     elif table_name=='qualifyingResults':
 
          table=r_table[['racesId','Driver_driverId','Constructor_constructorId','number','position','Q1','Q2','Q3']]
          table.columns=['raceId','driverId','constructorId','number','position','Q1','Q2','Q3']
+         return table
     
     elif table_name=='sprintResults':
     
@@ -241,11 +247,12 @@ def clean_table(table_name,year):
          table.columns=['raceId','driverId','constructorId','number','grid','position',
                'positionText','points','laps','time','millis','fastestLap',
                'fastestLaptime','status']  
+         return table
     else:
          return r_table
   except:
-    r_table
-  return table
+    return r_table
+  
 
 ############################################
 #  Regrasa la tabla consultada en un rango v1.1
