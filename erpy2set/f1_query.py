@@ -201,9 +201,8 @@ def raw_table(table_name,year):
 
 def clean_table(table_name,year):
 
-    r_table=raw_table(table_name,year)
-    print(r_table.keys())
-  #try:
+  r_table=raw_table(table_name,year)
+  try:
     if table_name=='races':
 
         table=r_table[['season','round','Circuit_circuitId','raceName','Circuit_circuitName','date','time','url','FirstPractice_date','SecondPractice_date','ThirdPractice_date','Sprint_date']]
@@ -242,17 +241,17 @@ def clean_table(table_name,year):
     
     elif table_name=='sprintResults':
     
-         table=r_table['racesId','Driver_driverId','Constructor_constructorId','number','grid','position',
+         table=r_table[['racesId','Driver_driverId','Constructor_constructorId','number','grid','position',
                'positionText','points','laps','Time_time','Time_millis','FastestLap_lap',
-               'FastestLap_Time_time', 'status']
+               'FastestLap_Time_time', 'status']]
          table.columns=['raceId','driverId','constructorId','number','grid','position',
                'positionText','points','laps','time','millis','fastestLap',
                'fastestLaptime','status']  
          return table
     else:
          return r_table
- # except:
-   # return r_table
+  except:
+    return r_table
   
 
 ############################################
