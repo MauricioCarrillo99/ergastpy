@@ -13,23 +13,24 @@ import requests as r
 import json 
 import pandas as pd
 import numpy as np
+import pdb
 
 """# **UNRAVEL PACK**
 
 """
 
 ########################################
-######### Primer dic en Df listas ###### v1.1
+## Return the first dict in a column ### v1.1
 ########################################
 
 def first_dict(column):
-
+  
   column=column[contains_dict(column)]
   
   return column.iloc[0]
 
 ########################################
-######### Existe en ambas listas ####### v1.1
+##### Verify if exists in both list #### v1.1
 ########################################
 
 def it_contains(list1,list2):
@@ -41,21 +42,21 @@ def it_contains(list1,list2):
     return False
 
 ########################################
-######### Restructura Dataframe ######## V1.1
+######### Restructure a DataFrame ###### V1.1
 ########################################
 
 def dataframe_res(Df1,location,Df2):
-
+    
+    Df=Df1
     Df2_names=Df2.columns.tolist()
-
-    for i in Df2.columns:
-      Df1.insert(loc=location, column=i,value=Df2[i])
+    for i in Df2_names:
+      Df.insert(loc=location, column=i,value=Df2[i])
       location+=1
     
-    return Df1
+    return Df
 
 ########################################
-###### Checa si el objeto es Dict ###### V1.0
+##### Verify if the object is a dict ### V1.0
 ########################################
 
 def is_dict(mydic):
@@ -65,7 +66,17 @@ def is_dict(mydic):
     return False
 
 ########################################
-#### Checa si la columna tiene dict ####  V1.0
+####  Verify if the object is a list ### V1.0
+########################################
+
+def is_list(mylist):
+  if type(mylist)==list:
+    return True
+  else:
+    return False
+
+########################################
+# Verify if a columns contains a dict #  V1.0
 ########################################
 
 def contains_dict(interest_column):
@@ -82,42 +93,29 @@ def contains_dict(interest_column):
   return boolean_list
 
 ########################################
-######### Dict a Columnas ############## V1.0
+## Verify if a columns contains a list #  V1.0
 ########################################
 
-def expand(chosen_column, join_id_column,desired_column_name,prefix,f_dict):
+def contains_list(interest_column):
 
-    dictionary = []
+  boolean_list=[]
 
-    len_dict=len(f_dict)
-    empty_dict=dict(zip(f_dict.keys(), [np.nan]*len_dict))
+  for i in range(len(interest_column)):
 
+    if is_list(interest_column[i]):
+      boolean_list.append(True)
+    else:
+      boolean_list.append(False)
 
-    for i,k in zip(chosen_column,join_id_column):
-
-        if pd.isnull(i)==True:
-            i=empty_dict
-        if i:
-
-            dict1 = {desired_column_name: k }
-            new_dict = {**dict1, **i}
-            dictionary.append(new_dict)
-
-            Df=pd.DataFrame(dictionary)
-            Df_names=Df.columns.tolist()
-            Df_names.remove(desired_column_name)
-
-    for i in Df_names:  
-      Df.rename(columns={i:prefix+'_'+i}, inplace=True)
-
-    return Df
+  return boolean_list
 
 ########################################
-######### Dict a Columnas nokey ######## V1.0
+######### Dict to Columns   ############ V1.0
 ########################################
 
-def expand_noKey(chosen_column, prefix,f_dict):
+def expand(chosen_column,prefix):
 
+    f_dict=first_dict(chosen_column)
     dictionary = []
 
     len_dict=len(f_dict)
@@ -128,7 +126,7 @@ def expand_noKey(chosen_column, prefix,f_dict):
 
         if pd.isnull(i)==True:
             i=empty_dict
-        if i:
+        elif i:
             new_dict = {**i}
             dictionary.append(new_dict)
 
@@ -141,7 +139,57 @@ def expand_noKey(chosen_column, prefix,f_dict):
     return Df
 
 ########################################
-## Regresa las columnas estructuradas ##  V1.0
+######### Dict to Columns nokey ######## V1.0
+########################################
+
+def expand_noKey(chosen_column):
+
+    f_dict=first_dict(chosen_column)
+    dictionary = []
+
+    len_dict=len(f_dict)
+    empty_dict=dict(zip(f_dict.keys(), [np.nan]*len_dict))
+
+
+    for i in chosen_column:
+
+        if pd.isnull(i)==True:
+            i=empty_dict
+        elif i:
+            new_dict = {**i}
+            dictionary.append(new_dict)
+
+            Df=pd.DataFrame(dictionary)
+            Df_names=Df.columns.tolist()
+
+    return Df
+
+########################################
+#########  All the columns   ########### v1.1
+########################################
+
+
+def unravel(Df): 
+
+  # inp=inplace
+  expand_names=st_df(Df)
+  if it_contains(expand_names,Df.columns.tolist())==True:
+       for i in expand_names:
+
+         df_aux=expand(Df[i],i)   
+
+         position_insert=Df.columns.get_loc(i)
+         Df=dataframe_res(Df,position_insert+1,df_aux)
+         Df.drop(i, inplace=True, axis=1)
+
+         unravel(Df)
+
+         return Df
+  else:
+         return Df
+
+########################################
+##      Return structed columns       ##  V1.0
 ########################################
 
 def st_df(Df):
@@ -151,56 +199,7 @@ def st_df(Df):
 
  for i in columns_names:
 
-    if True in contains_dict(Df[i]):
+    if True in (contains_dict(Df[i]) or contains_list(Df[i])):
       structure_columns_names.append(i)
   
  return structure_columns_names
-
-########################################
-######### Todas las columnas ########### v1.1
-########################################
-
-def unravel(Df, join_id_column,desired_column_name): 
-  
-  expand_names=st_df(Df)
-
-  if it_contains(expand_names,Df.columns.tolist())==True:
-       for i in expand_names:
-
-
-         df_aux=expand(Df[i].tolist(), join_id_column.tolist(), desired_column_name,i,first_dict(Df[i]))
-         new_cols=df_aux.loc[:, df_aux.columns!=desired_column_name]      
-
-         position_insert=Df.columns.get_loc(i)
-         Df=dataframe_res(Df,position_insert,new_cols)
-         Df.drop(i, inplace=True, axis=1)
-
-         unravel(Df,join_id_column,desired_column_name)
-
-         return Df
-  else:
-         return Df
-
-
-########################################
-####### Todas las columnas nokey ####### v1.1
-########################################
-
-def unravel_noKey(Df):
-  expand_names=st_df(Df)
-
-  if it_contains(expand_names,Df.columns.tolist())==True:
-       for i in expand_names:
-
-
-         df_aux=expand_noKey(Df[i].tolist(),i,first_dict(Df[i]))
-
-         position_insert=Df.columns.get_loc(i)
-         Df=dataframe_res(Df,position_insert,df_aux)
-         Df.drop(i, inplace=True, axis=1)
-
-         unravel_noKey(Df)
-
-         return Df
-  else:
-         return Df
