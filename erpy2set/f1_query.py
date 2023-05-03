@@ -107,7 +107,7 @@ def num_races(year):
   data=r.get(url).json()
   races=pd.DataFrame(data['MRData']['RaceTable']['Races'])
     
-  if year=2022:
+  if year==2022:
     return len(races.axes[0])+1
   else:
     return len(races.axes[0])
