@@ -107,7 +107,8 @@ def num_races(year):
   data=r.get(url).json()
   races=pd.DataFrame(data['MRData']['RaceTable']['Races'])
 
-  return len(races.axes[0])
+  #return len(races.axes[0])
+  return races
 
 ############################################
 # Regresa la cuerda con la primer letra Mayuscula  v1.1
