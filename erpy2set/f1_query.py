@@ -77,7 +77,7 @@ def constructorResults_tbl(year):
 
       aux_data=pd.DataFrame(r.get(url).json()['MRData']['RaceTable']['Races'][0]['Results'])
       aux_data=aux_data[['Constructor','points','status']]
-      un.unravel_noKey(aux_data)
+      un.unravel(aux_data)
 
       aux_data['raceId']=i
       data=data.append(aux_data)
@@ -160,7 +160,7 @@ def raw_table(table_name,year):
      locations=dimension_tables[table_name]
      Df=pd.DataFrame(data['MRData'][locations][firstCap(table_name)])
 
-     un.unravel_noKey(Df)
+     un.unravel(Df)
 
     elif table_name in fact_tables:
 
@@ -171,7 +171,7 @@ def raw_table(table_name,year):
 
            locations=fact_tables[table_name]
            aux_Df=pd.DataFrame(data['MRData'][locations[0]][locations[1]][0][firstCap(table_name)])
-           un.unravel_noKey(aux_Df)
+           un.unravel(aux_Df)
            aux_Df['racesId']=i
            aux_Df['year']=year
         
