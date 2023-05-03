@@ -106,9 +106,11 @@ def num_races(year):
   url=f'https://ergast.com/api/f1/{year}/races.json'
   data=r.get(url).json()
   races=pd.DataFrame(data['MRData']['RaceTable']['Races'])
-
-  #return len(races.axes[0])
-  return races
+    
+  if year=2022:
+    return len(races.axes[0])+1
+  else:
+    return len(races.axes[0])
 
 ############################################
 # Regresa la cuerda con la primer letra Mayuscula  v1.1
