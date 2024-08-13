@@ -23,10 +23,10 @@ def laps_tbl(year):
   data=pd.DataFrame()
   n=num_races(year)
 
-  for j in list(range(1,n+1)):
+  for j in range(1,n+1):
     k=max_laps(year,j)
     
-    for i in list(range(1,k+1)):
+    for i in range(1,k+1):
         try:
             url=f'http://ergast.com/api/f1/{year}/{j}/laps/{i}.json'
             aux_data=pd.DataFrame(r.get(url).json()['MRData']['RaceTable']['Races'][0]['Laps'][0]['Timings'])
@@ -45,7 +45,7 @@ def pitstops_tbl(year):
   data=pd.DataFrame()
   n=num_races(year)
 
-  for i in list(range(1,n+1)):
+  for i in range(1,n+1):
 
     try:
       url=f'http://ergast.com/api/f1/{year}/{i}/pitstops.json'
@@ -65,7 +65,7 @@ def constructorResults_tbl(year):
   data=pd.DataFrame()
   n=num_races(year)
 
-  for i in list(range(1,n+1)):
+  for i in range(1,n+1):
 
       url=f'https://ergast.com/api/f1/{year}/{i}/results.json'
 
@@ -107,8 +107,8 @@ def num_races(year):
     return len(races.axes[0])
 
 ############################################
-# Return the string that contains a uppercase letter
-# at the beggining  v1.1
+# Return the string that contains a uppercase 
+# letter at the beggining  v1.1
 ############################################
 
 def firstCap(string_toCap):
@@ -162,7 +162,7 @@ def raw_table(table_name,year):
 
     elif table_name in fact_tables:
 
-      for i in list(range(1,total_races+1)):
+      for i in range(1,total_races+1):
         try:
            url=f'https://ergast.com/api/f1/{year}/{i}/{adj_name(table_name)}.json'
            data=r.get(url).json() 
@@ -261,7 +261,7 @@ def query_range(table_name,initial_date,final_date):
 
   Df=pd.DataFrame()
 
-  for i in list(range(initial_date,final_date+1)):
+  for i in range(initial_date,final_date+1):
 
       aux_Df=clean_table(table_name,i)
       Df=pd.concat([DF,aux_Df],axis=0)
@@ -290,15 +290,3 @@ def full_schema(initial_date,final_date):
   print('full success at retrieving the schema')
 
   return dict(zip(schema, tables))
-
-from datetime import time
-
-def adj_type(table):
-    
-  print('adj_type still in develop')
-  string_type=[]
-  date_type=[]
-  time_type=[]
-  int_type=[]
-  float_type=[]
-
